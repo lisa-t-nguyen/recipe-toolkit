@@ -20,10 +20,6 @@ var searchRecipeHeart = document.querySelector('.recipeheart');
 // var recipeItem = document.querySelector('.recipeitem');
 var shopListForm = document.getElementById('shoppinglist-form');
 var ulShopList = document.getElementById('shop-list');
-var data = {
-  view: 'home',
-  heart: ''
-};
 
 searchResults.addEventListener('click', heartFill);
 
@@ -67,6 +63,7 @@ function viewChange(string) {
     searchPage.className = 'searchpage hidden';
     searchResults.className = 'search-results hidden';
     shoppingListView.className = 'shoppinglist hidden';
+    favoritesView.className = 'favoritesview hidden';
     bottomBar.className = 'bottombar hidden';
     homepage.className = 'homepage';
   }
@@ -113,7 +110,8 @@ function viewChange(string) {
   }
 }
 
-viewChange('home');
+// viewChange('home');
+document.addEventListener('DOMContentLoaded', viewChange(data.view));
 
 homeviewIcon.addEventListener('click', function (event) {
   viewChange('home');
