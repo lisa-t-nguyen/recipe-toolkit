@@ -12,35 +12,162 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin="anonymous"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+    integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==">
 </head>
 <body>
   <header>
   </header>
   <main>
-    <div class="background">
-      <div data-view="home" class="homepage hidden">
-        <div class="homesearch">
-          <i class="fa-solid fa-carrot homecarrot"></i>
-          <h1 class="hometext">Recipe Toolkit</h1>
-          <input type="button" value="Search" id="searchbutton">
+    <div class="topbar">
+      <div class="h2bar">
+        <div class="recipetoolkitdiv">
+          <h2 class="topbarh2">Recipe Toolkit</h2>
         </div>
-      </div>
-      <div class="topbar">
-        <div class="h2bar">
-          <div class="recipetoolkitdiv">
-            <h2 class="topbarh2">Recipe Toolkit</h2>
-          </div>
-          <i class="fa-solid fa-carrot topbarcarrot"></i>
-        </div>
-      </div>
-      <div class="bottombar">
-        <i class="fa-solid fa-house"></i>
-        <i class="fa-regular fa-heart"></i>
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <i class="fa-solid fa-cart-shopping"></i>
+        <i class="fa-solid fa-carrot topbarcarrot"></i>
       </div>
     </div>
+    <section>
+      <div class="background">
+        <div data-view="searchpage" class="searchpage">
+          <i class="fa-solid fa-magnifying-glass searchmagnify"></i>
+          <input type="text" value="         Search" class="searchinput">
+        </div>
+        <div data-view="home" class="homepage hidden">
+          <div class="homesearch">
+            <i class="fa-solid fa-carrot homecarrot"></i>
+            <h1 class="hometext">Recipe Toolkit</h1>
+            <input type="button" value="Search" id="searchbutton">
+          </div>
+        </div>
+        <div class="search-results">
+          <div class="recipeitem">
+            <img src="./images/placeholder image.png" alt="">
+            <div class="recipe-container">
+              <h2 class="recipetitle">Recipe title</h2>
+              <a href="#">View Recipe</a>
+            </div>
+            <div class="caloriescontainer">
+              <p class="recipedata">Calories: 2000</p>
+              <i data-heart="1" class="fa-regular fa-heart recipeheart"></i>
+            </div>
+          </div>
+          <div class="recipeitem">
+            <img src="./images/placeholder image.png" alt="">
+            <div class="recipe-container">
+              <h2 class="recipetitle">Recipe title</h2>
+              <a href="#">View Recipe</a>
+            </div>
+            <div class="caloriescontainer">
+              <p class="recipedata">Calories: 2000</p>
+              <i data-heart="2" class="fa-regular fa-heart recipeheart"></i>
+            </div>
+          </div>
+          <div class="recipeitem">
+            <img src="./images/placeholder image.png" alt="">
+            <div class="recipe-container">
+              <h2 class="recipetitle">Recipe title</h2>
+              <a href="#">View Recipe</a>
+            </div>
+            <div class="caloriescontainer">
+              <p class="recipedata">Calories: 2000</p>
+              <i data-heart="3" class="fa-regular fa-heart recipeheart"></i>
+            </div>
+          </div>
+          <div class="recipeitem">
+            <img src="./images/placeholder image.png" alt="">
+            <div class="recipe-container">
+              <h2 class="recipetitle">Recipe title</h2>
+              <a href="#">View Recipe</a>
+            </div>
+            <div class="caloriescontainer">
+              <p class="recipedata">Calories: 2000</p>
+              <i data-heart="4" class="fa-regular fa-heart recipeheart"></i>
+            </div>
+          </div>
+        </div>
+        <div data-view="shoppinglist" class="shoppinglist">
+          <div class="spaceholder"></div>
+          <h2 class="h2shoppinglist">Shopping List</h2>
+          <div class="spaceholder"></div>
+          <form id="shoppinglist-form" class="">
+            <div class="input-group">
+              <input required
+               autofocus
+               type="text"
+               name="task"
+               class="form-control"
+               placeholder="Add ingredients....">
+              <div class="input-group-append">
+                <button type="submit" class="shoplistbutton">ADD</button>
+              </div>
+            </div>
+          </form>
+          <div class="spaceholder"></div>
+          <ul id="shop-list" class="list-group"></ul>
+        </div>
+        <div data-view="favorites" class="favoritesview hidden">
+          <div class="spaceholder"></div>
+          <h2 class="h2favorites">My Favorites</h2>
+          <div class="search-results-favorites">
+            <div class="recipeitem">
+              <img src="./images/placeholder image.png" alt="">
+              <div class="recipe-container">
+                <h2 class="recipetitle">Recipe title</h2>
+                <a href="#">View Recipe</a>
+              </div>
+              <div class="caloriescontainer">
+                <p class="recipedata">Calories: 2000</p>
+                <i class="fa-solid fa-heart favoritesrecipeheart"></i>
+              </div>
+            </div>
+            <div class="recipeitem">
+              <img src="./images/placeholder image.png" alt="">
+              <div class="recipe-container">
+                <h2 class="recipetitle">Recipe title</h2>
+                <a href="#">View Recipe</a>
+              </div>
+              <div class="caloriescontainer">
+                <p class="recipedata">Calories: 2000</p>
+                <i class="fa-solid fa-heart favoritesrecipeheart"></i>
+              </div>
+            </div>
+            <div class="recipeitem">
+              <img src="./images/placeholder image.png" alt="">
+              <div class="recipe-container">
+                <h2 class="recipetitle">Recipe title</h2>
+                <a href="#">View Recipe</a>
+              </div>
+              <div class="caloriescontainer">
+                <p class="recipedata">Calories: 2000</p>
+                <i class="fa-solid fa-heart favoritesrecipeheart"></i>
+              </div>
+            </div>
+            <div class="recipeitem">
+              <img src="./images/placeholder image.png" alt="">
+              <div class="recipe-container">
+                <h2 class="recipetitle">Recipe title</h2>
+                <a href="#">View Recipe</a>
+              </div>
+              <div class="caloriescontainer">
+                <p class="recipedata">Calories: 2000</p>
+                <i class="fa-solid fa-heart favoritesrecipeheart"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="bottombar">
+      <i class="fa-solid fa-house homeview"></i>
+      <i class="fa-regular fa-heart favoritesheart"></i>
+      <i class="fa-solid fa-magnifying-glass searchglass"></i>
+      <i class="fa-solid fa-cart-shopping shoppingview"></i>
+    </div>
   </main>
+  <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.1/uuid.min.js"
+    integrity="sha512-4JH7nC4nSqPixxbhZCLETJ+DUfHa+Ggk90LETm25fi/SitneSvtxkcWAUujvYrgKgvrvwv4NDAsFgdwCS79Dcw=="></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
