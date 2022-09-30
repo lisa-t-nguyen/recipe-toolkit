@@ -1,0 +1,237 @@
+.hidden {
+  display: none !important;
+}
+
+.homecarrot {
+  font-size: 15rem;
+  color: #f5c782;
+}
+
+.topbarcarrot {
+  color: #f5c782;
+  font-size: 2rem;
+  margin-right: 20px;
+}
+
+.background {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+section {
+  background-color: #85c296;
+  min-height: 89vh;
+}
+
+.topbarh2 {
+  font-family: Pacifico, sans-serif;
+  color: #85c296;
+  font-weight: 1;
+  margin-left: 20px;
+}
+
+.recipetoolkitdiv {
+  width: 100%;
+  text-align: center;
+}
+
+.h2bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  background-color: white;
+}
+
+.hometext {
+  font-family: Pacifico, sans-serif;
+  font-weight: 1;
+  font-size: 3rem;
+  color: white;
+  margin-top: 40px;
+}
+
+.homepage {
+  background-color: #85c296;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.homesearch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 350px;
+}
+
+#searchbutton {
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  background-color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  padding: 20px;
+  width: 452px;
+  margin-top: 40px;
+}
+
+.searchinput {
+  font-family: Montserrat, sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px;
+  width: 80%;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  margin-top: 30px;
+  box-shadow: 4px 4px;
+  color: gray;
+}
+
+.bottombar {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  font-size: 2rem;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.searchpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchmagnify {
+  font-size: 2rem;
+  margin-top: 28px;
+  margin-left: 30px;
+  margin-right: -38px;
+  color: gray;
+  z-index: 1;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.search-results,
+.search-results-favorites {
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 25px;
+  justify-content: center;
+  align-items: center;
+  row-gap: 25px;
+}
+
+.recipeitem {
+  border-radius: 8px;
+  background-color: white;
+  padding: 15px;
+  flex-basis: 100%;
+}
+
+@media (min-width: 575px) {
+  .recipeitem { flex-basis: 50%; }
+}
+
+@media (min-width: 767px) {
+  .recipeitem { flex-basis: calc(90%/3); }
+}
+
+.recipe-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.caloriescontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.recipeheart,
+.favoritesrecipeheart {
+  font-size: 1.5rem;
+}
+
+.searchglass {
+  color: #76d9df;
+}
+
+.shoppingview {
+  color: #76d9df;
+}
+
+.favoritesheart,
+.favoritesrecipeheart {
+  color: #f46767;
+}
+
+.h2favorites {
+  margin: 0 auto;
+  text-align: center;
+  font-family: Pacifico, sans-serif;
+  font-weight: 1;
+  color: #85c296;
+  background-color: white;
+  border-radius: 15px;
+  height: 50px;
+}
+
+.h2shoppinglist {
+  margin: 0 auto;
+  text-align: center;
+  font-family: Pacifico, sans-serif;
+  font-weight: 1;
+  color: #85c296;
+  background-color: white;
+  border-radius: 15px;
+  height: 50px;
+}
+
+.shoppinglist {
+  font-family: Montserrat, sans-serif;
+  color: black;
+  font-weight: bold;
+}
+
+label {
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label {
+  font-family: Montserrat, sans-serif;
+  color: black;
+  font-weight: bold;
+  text-decoration: line-through;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+input.form-control {
+  font-weight: bold;
+  height: 50px;
+}
+
+.shoplistbutton {
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  border: none;
+  background-color: white;
+  color: #85c296;
+}
+
+.spaceholder {
+  height: 40px;
+}
