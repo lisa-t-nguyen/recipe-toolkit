@@ -2,7 +2,8 @@
 /* exported shoppingList */
 var data = {
   view: 'home',
-  heart: ''
+  recipes: [],
+  nextRecipeId: 1
 };
 
 var shoppingList = [];
