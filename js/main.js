@@ -90,6 +90,7 @@ function createRecipe(recipeObject) {
   var dataHeart = document.createElement('i');
   dataHeart.className = 'fa-regular fa-heart recipeheart';
   dataHeart.setAttribute('data-heart', recipeObject.recipeID);
+  dataHeart.setAttribute('title', 'Favorite');
   caloriesContainer.appendChild(dataHeart);
   return divRecipe;
 }
