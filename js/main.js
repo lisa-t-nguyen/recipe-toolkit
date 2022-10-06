@@ -1,6 +1,5 @@
 /* global uuid, shoppingList */
 
-var ulList = document.querySelector('.searchlist');
 var searchInput = document.querySelector('.searchinput');
 var topBar = document.querySelector('.topbar');
 var searchPage = document.querySelector('.searchpage');
@@ -15,45 +14,85 @@ var searchButton = document.getElementById('searchbutton');
 var shoppingListView = document.querySelector('.shoppinglist');
 var shoppingListIcon = document.querySelector('.shoppingview');
 var favoritesView = document.querySelector('.favoritesview');
-// var recipeHeart = document.querySelector('.favoritesrecipeheart');
+var recipeHeart = document.querySelector('.recipeheart');
 var searchRecipeHeart = document.querySelector('.recipeheart');
-// var recipeItem = document.querySelector('.recipeitem');
+var recipeItem = document.querySelector('.recipeitem');
 var shopListForm = document.getElementById('shoppinglist-form');
 var ulShopList = document.getElementById('shop-list');
+var formSearch = document.querySelector('.formsearch');
+var xhr = new XMLHttpRequest();
 
-searchResults.addEventListener('click', heartFill);
+var searchQuery = '';
+
+formSearch.addEventListener('submit', function (event) {
+  event.preventDefault();
+  searchQuery = searchInput.value;
+  getRecipe(searchQuery);
+});
 
 function getRecipe(name) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.edamam.com/api/recipes/v2?type=public&q=name&app_id=cab05a45&app_key=%20f5402f256b01046291b6033b982b5b4a&imageSize=REGULAR');
+  xhr.open('GET', 'https://api.edamam.com/api/recipes/v2?type=public&q=' + name + '&app_id=cab05a45&app_key=%20f5402f256b01046291b6033b982b5b4a&imageSize=REGULAR');
   xhr.responseType = 'json';
-  xhr.addEventListener('load', function () {
-    for (let i = 0; i < xhr.response.length; i++) {
-      var li = document.createElement('li');
-      li.textContent = xhr.response[i].label;
-      ulList.appendChild(li);
-    }
-  });
   xhr.send();
 }
 
-getRecipe('chicken');
+xhr.addEventListener('load', createRecipe);
 
-function heartFill(string) {
-  data.heart = string;
-  if (string === '1') {
-    searchRecipeHeart.className = 'fa-solid fa-heart favoritesrecipeheart';
-  }
-  if (string === '2') {
-    searchRecipeHeart.className = 'fa-solid fa-heart favoritesrecipeheart';
-  }
-  if (string === '3') {
-    searchRecipeHeart.className = 'fa-solid fa-heart favoritesrecipeheart';
-  }
-  if (string === '4') {
-    searchRecipeHeart.className = 'fa-solid fa-heart favoritesrecipeheart';
+function createRecipe() {
+  data.recipes = [];
+  for (let i = 0; i < xhr.response.hits.length; i++) {
+    var divRecipe = document.createElement('div');
+    divRecipe.className = 'recipeitem';
+    searchResults.appendChild(divRecipe);
+    var recipeImg = document.createElement('img');
+    divRecipe.appendChild(recipeImg);
+    recipeImg.src = xhr.response.hits[i].recipe.image;
+    recipeImg.setAttribute('alt', xhr.response.hits[i].recipe.label);
+    var recipeContainer = document.createElement('div');
+    recipeContainer.className = 'recipe-container';
+    divRecipe.appendChild(recipeContainer);
+    var recipeTitle = document.createElement('h6');
+    recipeTitle.textContent = xhr.response.hits[i].recipe.label;
+    recipeTitle.className = 'recipetitle';
+    recipeContainer.appendChild(recipeTitle);
+    var viewRecipe = document.createElement('a');
+    viewRecipe.setAttribute('href', xhr.response.hits[i].recipe.url);
+    viewRecipe.setAttribute('target', '_blank');
+    viewRecipe.setAttribute('rel', 'noopener noreferrer');
+    viewRecipe.textContent = 'View Recipe';
+    recipeContainer.appendChild(viewRecipe);
+    var caloriesContainer = document.createElement('div');
+    caloriesContainer.className = 'caloriescontainer';
+    divRecipe.appendChild(caloriesContainer);
+    var calories = document.createElement('p');
+    calories.textContent = 'Calories:' + ' ' + Math.round(xhr.response.hits[i].recipe.calories);
+    calories.className = 'recipedata';
+    caloriesContainer.appendChild(calories);
+    var dataHeart = document.createElement('i');
+    dataHeart.className = 'fa-regular fa-heart recipeheart';
+    var recipeID = data.nextRecipeId;
+    data.nextRecipeId++;
+    var recipeObject = {
+      recipeTitle: xhr.response.hits[i].recipe.label,
+      recipeImg: xhr.response.hits[i].recipe.image,
+      calories: Math.round(xhr.response.hits[i].recipe.calories),
+      viewRecipe: xhr.response.hits[i].recipe.url,
+      recipeID
+    };
+    dataHeart.setAttribute('data-heart', recipeObject.recipeID);
+    caloriesContainer.appendChild(dataHeart);
+    data.recipes.unshift(recipeObject);
   }
 }
+
+recipeItem.addEventListener('click', function (event) {
+  for (let i = 0; i < data.heart.length; i++) {
+    var dataHeartID = Number(recipeHeart[i].getAttribute('data-heart'));
+    if (event.target.matches(dataHeartID)) {
+      searchRecipeHeart.className = 'fa-solid fa-heart favoritesrecipeheart';
+    }
+  }
+});
 
 function viewChange(string) {
   data.view = string;
@@ -110,7 +149,6 @@ function viewChange(string) {
   }
 }
 
-// viewChange('home');
 document.addEventListener('DOMContentLoaded', viewChange(data.view));
 
 homeviewIcon.addEventListener('click', function (event) {
