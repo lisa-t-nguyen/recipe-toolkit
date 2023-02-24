@@ -14,14 +14,13 @@ var searchButton = document.getElementById('searchbutton');
 var shoppingListView = document.querySelector('.shoppinglist');
 var shoppingListIcon = document.querySelector('.shoppingview');
 var favoritesView = document.querySelector('.favoritesview');
-var recipeHeart = document.querySelector('.recipeheart');
-var searchRecipeHeart = document.querySelector('.recipeheart');
-var recipeItem = document.querySelector('.recipeitem');
 var shopListForm = document.getElementById('shoppinglist-form');
 var ulShopList = document.getElementById('shop-list');
 var formSearch = document.querySelector('.formsearch');
 var xhr = new XMLHttpRequest();
 var searchQuery = '';
+
+// Resets the form input when users search for a recipe
 
 formSearch.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -29,6 +28,8 @@ formSearch.addEventListener('submit', function (event) {
   getRecipe(searchQuery);
   formSearch.reset();
 });
+
+// Fetch recipe data from API and loop through recipe data to display on webpage
 
 function getRecipe(name) {
   xhr.open('GET', 'https://api.edamam.com/api/recipes/v2?type=public&q=' + name + '&app_id=cab05a45&app_key=%20f5402f256b01046291b6033b982b5b4a&imageSize=REGULAR');
@@ -55,6 +56,11 @@ function getRecipe(name) {
   });
   xhr.send();
 }
+
+// Recipe object created for each search result
+
+var unfilledHeart = 'fa-regular fa-heart recipeheart';
+var filledHeart = 'fa-solid fa-heart favoritesrecipeheart';
 
 function createRecipe(recipeObject) {
   var divRecipe = document.createElement('div');
@@ -88,12 +94,15 @@ function createRecipe(recipeObject) {
   calories.className = 'recipedata';
   caloriesContainer.appendChild(calories);
   var dataHeart = document.createElement('i');
-  dataHeart.className = 'fa-regular fa-heart recipeheart';
+  dataHeart.className = unfilledHeart;
   dataHeart.setAttribute('data-heart', recipeObject.recipeID);
   dataHeart.setAttribute('title', 'Favorite');
   caloriesContainer.appendChild(dataHeart);
+  dataHeart.addEventListener('click', addToFavorites);
   return divRecipe;
 }
+
+// Changes page views when users click on icons on the bottom navigation bar
 
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.recipes.length; i++) {
@@ -103,14 +112,17 @@ document.addEventListener('DOMContentLoaded', function (event) {
   viewChange(data.view);
 });
 
-recipeItem.addEventListener('click', function (event) {
-  for (let i = 0; i < data.heart.length; i++) {
-    var dataHeartID = Number(recipeHeart[i].getAttribute('data-heart'));
-    if (event.target.matches(dataHeartID)) {
-      searchRecipeHeart.className = 'fa-solid fa-heart favoritesrecipeheart';
-    }
+// Toggled heart icon to be filled when clicked on
+
+function addToFavorites(event) {
+  if (event.target.className === unfilledHeart) {
+    event.target.className = filledHeart;
+  } else if (event.target.className === filledHeart) {
+    event.target.className = unfilledHeart;
   }
-});
+}
+
+// Navigation icons functionality
 
 function viewChange(string) {
   data.view = string;
@@ -167,6 +179,8 @@ function viewChange(string) {
   }
 }
 
+// Navigation icons
+
 homeviewIcon.addEventListener('click', function (event) {
   viewChange('home');
 });
@@ -186,6 +200,8 @@ shoppingListIcon.addEventListener('click', function (event) {
 favoritesIcon.addEventListener('click', function (event) {
   viewChange('favorites');
 });
+
+// Shopping list
 
 function renderList(shopList) {
   var shopListItem = document.createElement('li');
@@ -210,6 +226,8 @@ function renderList(shopList) {
 
   return shopListItem;
 }
+
+// Resets input bar when users add an item to shopping list
 
 shopListForm.addEventListener('submit', function (event) {
   event.preventDefault();
