@@ -14,6 +14,7 @@ var searchButton = document.getElementById('searchbutton');
 var shoppingListView = document.querySelector('.shoppinglist');
 var shoppingListIcon = document.querySelector('.shoppingview');
 var favoritesView = document.querySelector('.favoritesview');
+var favoritesList = document.querySelector('.search-results-favorites');
 var shopListForm = document.getElementById('shoppinglist-form');
 var ulShopList = document.getElementById('shop-list');
 var formSearch = document.querySelector('.formsearch');
@@ -25,13 +26,13 @@ var searchQuery = '';
 formSearch.addEventListener('submit', function (event) {
   event.preventDefault();
   searchQuery = searchInput.value;
-  getRecipe(searchQuery);
+  searchRecipes(searchQuery);
   formSearch.reset();
 });
 
 // Fetch recipe data from API and loop through recipe data to display on webpage
 
-function getRecipe(name) {
+function searchRecipes(name) {
   xhr.open('GET', 'https://api.edamam.com/api/recipes/v2?type=public&q=' + name + '&app_id=cab05a45&app_key=%20f5402f256b01046291b6033b982b5b4a&imageSize=REGULAR');
   xhr.responseType = 'json';
   data.recipes = [];
@@ -55,6 +56,16 @@ function getRecipe(name) {
     }
   });
   xhr.send();
+}
+
+// Search for recipe by ID to add to favorites
+
+function getRecipes(ID) {
+  for (let i = 0; i < data.recipes.length; i++) {
+    if (ID === data.recipes[i].recipeID.toString()) {
+      return data.recipes[i];
+    }
+  }
 }
 
 // Recipe object created for each search result
@@ -98,27 +109,55 @@ function createRecipe(recipeObject) {
   dataHeart.setAttribute('data-heart', recipeObject.recipeID);
   dataHeart.setAttribute('title', 'Favorite');
   caloriesContainer.appendChild(dataHeart);
-  dataHeart.addEventListener('click', addToFavorites);
+  dataHeart.addEventListener('click', toggleFavorites);
   return divRecipe;
 }
 
-// Changes page views when users click on icons on the bottom navigation bar
+// Loads all recipes in window from local storage
 
 document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.recipes.length; i++) {
-    var recipeList = createRecipe(data.recipes[i]);
-    searchResults.append(recipeList);
+    var recipe = createRecipe(data.recipes[i]);
+    searchResults.append(recipe);
   }
+  populateFavorites(event);
   viewChange(data.view);
 });
 
 // Toggled heart icon to be filled when clicked on
 
-function addToFavorites(event) {
+function toggleFavorites(event) {
   if (event.target.className === unfilledHeart) {
-    event.target.className = filledHeart;
+    addToFavorites(event);
   } else if (event.target.className === filledHeart) {
     event.target.className = unfilledHeart;
+  }
+}
+
+// Add to favorites function
+
+function addToFavorites(event) {
+  var recipeID = event.target.getAttribute('data-heart');
+  var recipe = getRecipes(recipeID);
+  event.target.className = filledHeart;
+  var favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes') || '[]');
+  var recipeIndex = favoriteRecipes.indexOf(recipe);
+  if (recipeIndex === -1) {
+    favoriteRecipes.push(recipe);
+  } else {
+    favoriteRecipes.splice(recipeIndex, 1);
+  }
+  localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+}
+
+// Remove from favorites function
+
+// Show favorites list on favorites page
+
+function populateFavorites(event) {
+  for (let i = 0; i < favorites.length; i++) {
+    var recipe = createRecipe(favorites[i]);
+    favoritesList.append(recipe);
   }
 }
 
