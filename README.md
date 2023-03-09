@@ -15,7 +15,7 @@ Being a cook myself, I wanted my first solo-project to be something oriented aro
 * [Edamam API](https://www.edamam.com/)
 
 # Live Deployment
-https://lisa-t-nguyen.github.io/ajax-project/
+https://lisa-t-nguyen.github.io/recipe-toolkit/
 
 # MVP Features
 * Users can search for a recipe
